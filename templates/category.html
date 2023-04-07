@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+	<a href="#" class="bigrek"></a>
+	<div class="container wrapper">
+		<div class="longrek"></div>
+		<div class="clearfix"></div>
+		
+		<ol class="breadcrumb">
+			<li><a href="{% url 'home'%}">Home</a></li>
+
+		</ol>
+		<div class="row">
+			<div class="col-md-8 col-xs-12">
+				<div class="cat_title">{{ big.ctg}}</div>
+				<div class="big_fav pop_cat">
+				<div id="bigfav" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img src="{{ big.img.url }}" alt="...">
+								<a href="{% url 'view' pk=big.id %}">
+									<div class="carousel-caption">
+										<div class="caption_pos">
+											<div class="type_news">{{ big.ctg }}</div>
+											<div class="title">{{ big.titel }}</div>
+											<span class="date">{{ big.date.date }}</span>
+										</div>
+									</div>
+								</a>
+						</div>
+					</div>
+					<div class="control">
+					</div>
+				</div>
+			</div>
+				<div class="news_box">
+					{% for i in ctg_news %}
+						<div class="cat_news">
+							<div class="cat_img"><img src="{{ i.img.url }}" alt=""></div>
+							<a href="{% url 'view' pk=i.id %}">{{ i.titel}}</a>
+							<p>{{ i.short_desc }}</p>
+							<span class="date">{{ i.date.date }}</span>
+							<span class="news_type"><i class="fa fa-pencil"></i> {{ i.ctg }}</span>
+						</div>
+					{% endfor %}
+					<nav aria-label="Page navigation">
+
+					</nav>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-12">
+				<div class="head_title">Свежие новости</div>
+				<div id="listnews" class="carousel slide listnews" data-ride="carousel">
+					<div class="news_box">
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<ul class="list_news">
+
+									{% for i in fresh %}
+									{% if forloop.counter <= 4 %}
+										<li>
+											<div class="list_img"><img src="{{ i.img.url }}" alt=""></div>
+											<a href="{% url 'view' pk=i.id %}">{{ i.titel }}</a>
+											<span class="date">{{ i.date.date }}</span>
+											<span class="news_type"><i class="fa fa-pencil"></i> {{ i.ctg }}</span>
+										</li>
+									{% endif %}
+									{% endfor %}
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				
+				<div class="news_box rek">
+					<div class="rek_right">
+						
+					</div>
+				</div>
+				<div class="subscribe">
+					<div class="title">Подписывайся на <b>1news.uz</b></div>
+					<form action="">
+						<div class="input-group">
+							<input type="text" name="email" placeholder="Email">
+							<button class="submit">Подписываться</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="foot_about">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-xs-12"><img src="img/logo.png" alt="" class="logo"></div>
+				<div class="col-md-6 col-xs-12">
+					<div class="title">О нас</div>
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec</p>
+				</div>
+				<div class="col-md-3 col-xs-12 text-right">
+					<ul class="social">
+						<li><a href="#"><span class="fa fa-facebook-f"></span></a></li>
+						<li><a href="#"><span class="fa fa-twitter"></span></a></li>
+						<li><a href="#"><span class="fa fa-linkedin"></span></a></li>
+						<li><a href="#"><span class="fa fa-telegram"></span></a></li>
+						<li><a href="#"><span class="fa fa-google-plus"></span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+
+	<a href="#" class="bigrek"></a>
+	<div class="container wrapper">
+		<div class="longrek"></div>
+		<div class="clearfix"></div>
+		
+		<ol class="breadcrumb">
+			<li><a href="{% url 'home'%}">Home</a></li>
+			<li><a href="{% url 'ctg' key=new.ctg.key %}">{{ new.ctg }}</a></li>
+			<li class="active">{{ new.titel }}</li>
+		</ol>
+		<div class="row">
+			<div class="col-md-8 col-xs-12">
+				<div class="view_img"><img src="{{ new.img.url }}" alt=""></div>
+				<div class="news_box view">
+					<div class="view_title">{{ new.titel }}</div>
+					<span class="date">{{ new.date.date }}</span>
+					<span class="news_type"><i class="fa fa-pencil"></i> {{ new.ctg }}</span>
+					<div class="view_desc">
+					<p>{{ new.desc }}</p>
+				</div>
+				<ul class="tag">
+				</ul>
+				<div class="comment">
+					<div class="title">Comment <sub>{{cmt_cnt}}</sub></div>
+					<ul>
+						{% for i in comments %}
+							<li>
+								<div class="com_img"><img src="{{ i.img.url }}" alt=""></div>
+								<div class="com_info">
+									<div class="author">{{ i.author }}</div>
+									<p> {{ i.izoh }}</p>
+									<div class="date">{{ i.date.date }}</div>
+									<hr>
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+
+					<div class="feedback">
+					<div class="title">Siz bu yerda o`z fikringizni yozishingiz mumkin !</div>
+					<form method="post">
+						{% csrf_token %}
+						<input type="text" name="ism" placeholder="Ismingizni yozing">
+						<input type="text" name="tel" placeholder="Telefon rqamingizni yozing">
+						<textarea name="izoh" id="" cols="30" rows="10" placeholder="Xabar"></textarea>
+						<button class="btn add_comment">Kamentariya yuborish</button>
+					</form>
+				</div>
+				</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-12">
+				<div class="head_title">Свежие новости</div>
+				<div id="listnews" class="carousel slide listnews" data-ride="carousel">
+					<div class="news_box">
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<ul class="list_news">
+									{% for i in fresh %}
+									{% if forloop.counter < 5 %}
+										<li>
+											<div class="list_img"><img src="{{ i.img.url }}" alt=""></div>
+											<a href="{% url 'view' pk=i.id %}">{{ i.titel }}</a>
+											<span class="date">{{ i.date.date }}</span>
+											<span class="news_type"><i class="fa fa-pencil"></i> {{ i.ctg}}</span>
+										</li>
+
+									{% endif%}
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="foot_about">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-xs-12"><img src="img/logo.png" alt="" class="logo"></div>
+				<div class="col-md-6 col-xs-12">
+					<div class="title">О нас</div>
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec</p>
+				</div>
+				<div class="col-md-3 col-xs-12 text-right">
+					<ul class="social">
+						<li><a href="#"><span class="fa fa-facebook-f"></span></a></li>
+						<li><a href="#"><span class="fa fa-twitter"></span></a></li>
+						<li><a href="#"><span class="fa fa-linkedin"></span></a></li>
+						<li><a href="#"><span class="fa fa-telegram"></span></a></li>
+						<li><a href="#"><span class="fa fa-google-plus"></span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

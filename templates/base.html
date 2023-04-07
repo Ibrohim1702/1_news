@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Template</title>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/media.css' %}">
+</head>
+<body>
+	<div class="topheader">
+		<div class="container">
+			<ul class="menu">
+				<li><a href="https://1news.az/onas/">Biz haqimizda</a></li>
+				<li><a href="{% url 'ctg' key='siyosat' %}">Siyosat</a></li>
+				<li><a href="{% url 'cnt' %}">Kontakt</a></li>
+			</ul>
+			<ul class="kurs">
+				{% for i in valyutalar %}
+					{% if i.Ccy == "USD" or i.Ccy == "RUB" or i.Ccy == "EUR" %}
+						<li>1 {{ i.Ccy }} = {{ i.Rate }}</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+			<ul class="lang">
+
+				<li class="active"><a href="#">Ру</a></li>
+				<li><a href="">O'z</a></li>
+				<li><a href="">Уз</a></li>
+			</ul>
+			<ul class="social">
+				<li><a href="{% url 'home' %}"><span class="fa fa-home"></span></a></li>
+				<li><a href="#"><span class="fa fa-facebook-f"></span></a></li>
+				<li><a href="#"><span class="fa fa-twitter"></span></a></li>
+				<li><a href="#"><span class="fa fa-linkedin"></span></a></li>
+				<li><a href="https://t.me/ibrokhm1"><span class="fa fa-telegram"></span></a></li>
+
+				<li><a href="#"><span class="fa fa-rss"></span></a></li>
+			</ul>
+		</div>
+	</div>
+	<nav class="navbar">
+  	<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<i class="fa fa-close"></i>
+				</button>
+				<ul class="nav navbar-nav">
+					{% for i in menu_ctgs %}
+						{% if i == ctg %}
+					     <li><a class="activate">{{ i.name }}</a></li>
+						{% else %}
+						<li><a href="{% url 'ctg' key=i.key %}">{{ i.name }}</a></li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+				<button type="button" class="btn navbar-right search_btn hidden-xs"><i class="fa fa-search"></i></button>
+				<form action="{% url 'search'  %}" method="get" id="search" class="navbar-form navbar-right search_btn_box hidden-xs">
+        <button class="btn btn-default" type="button">
+          <span><i class="fa fa-search"></i></span></button>
+        <div class="input-group">
+          <input type="text" name="s" id="searchName" class="form-control" placeholder="Поиск..." required="">
+          <input type="submit" hidden="">
+        </div>
+        <button type="button" class="btn  search_btn_close hidden-xs active"><i class="fa fa-close"></i></button>
+      </form>
+			</div>
+		</div>
+	</nav>
+
+
+{% block content %}{% endblock %}
+    <footer>
+		<div class="container">
+			<ul class="menu">
+				<li><a href="https://1news.az/onas/">о нас</a></li>
+				<li><a href="https://t.me/ibrokhm1">контакты</a></li>
+				<li><a href="https://1news.az/">редакционная</a></li>
+				<li><a href="https://1news.az/">ОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a></li>
+				<li><a href="https://1news.az/">СОГЛАШЕНИЕ</a></li>
+			</ul>
+			<div class="copyright">
+				© COPYRIGHT 2023 BY <a href="https://t.me/ibrokhm1">Ibrohim</a>
+			</div>
+		</div>
+	</footer>
+
+
+
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
